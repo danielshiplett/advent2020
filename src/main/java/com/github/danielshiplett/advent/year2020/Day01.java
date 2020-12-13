@@ -9,9 +9,10 @@ import java.util.List;
 
 public class Day01 extends AbstractDay {
 
-    public int part01() {
+    public void part01() {
         List<Integer> expenses = getExpenses("2020/day01part01.txt");
         int n = expenses.size();
+        int result = 0;
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
@@ -23,20 +24,20 @@ public class Day01 extends AbstractDay {
                 Integer jj = expenses.get(j);
 
                 if(ii + jj == 2020) {
-                    System.out.println("ii: " + ii);
-                    System.out.println("jj: " + jj);
-                    return ii * jj;
+                    LOG.debug("ii: {}", ii);
+                    LOG.debug("jj: {}", jj);
+                    result =  ii * jj;
                 }
             }
         }
 
-        // not found
-        return 0;
+        LOG.info("Day 01 - Part 01: {}", result);
     }
 
-    public int part02() {
+    public void part02() {
         List<Integer> expenses = getExpenses("2020/day01part01.txt");
         int n = expenses.size();
+        int result = 0;
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
@@ -50,23 +51,22 @@ public class Day01 extends AbstractDay {
                     Integer kk = expenses.get(k);
 
                     if (ii + jj + kk == 2020) {
-                        System.out.println("ii: " + ii);
-                        System.out.println("jj: " + jj);
-                        System.out.println("kk: " + kk);
-                        return ii * jj * kk;
+                        LOG.debug("ii: {}", ii);
+                        LOG.debug("jj: {}", jj);
+                        LOG.debug("kk: {}", kk);
+                        result = ii * jj * kk;
                     }
                 }
             }
         }
 
-        // not found
-        return 0;
+        LOG.info("Day 01 - Part 02: {}", result);
     }
 
     private List<Integer> getExpenses(String fileName) {
         List<Integer> expenses = null;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(getFile("2020/day01part01.txt")))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(getFile(fileName)))) {
             expenses = new ArrayList<>();
             String line;
 

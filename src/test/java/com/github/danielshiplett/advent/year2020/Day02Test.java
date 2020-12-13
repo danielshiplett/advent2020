@@ -3,22 +3,22 @@ package com.github.danielshiplett.advent.year2020;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Day01Test {
+public class Day02Test {
 
-    private Day01 day01;
+    private Day02 day02;
 
     @BeforeEach
     public void beforeEach() {
-        day01 = new Day01();
+        day02 = new Day02();
     }
 
     @Test
     public void testPart01() {
-        day01.part01();
+        day02.part01();
     }
 
     @Test
     public void testPart02() {
-        day01.part02();
+        day02.part02();
     }
 }

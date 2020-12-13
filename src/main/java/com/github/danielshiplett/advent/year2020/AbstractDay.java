@@ -11,9 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public class AbstractDay {
+public abstract class AbstractDay {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractDay.class);
+
+    public abstract void part01();
+    public abstract void part02();
 
     protected URL getResourceUrl(String resourceName) {
         return getClass().getClassLoader().getResource(resourceName);

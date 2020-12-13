@@ -1,52 +1,45 @@
 package com.github.danielshiplett.advent.year2020;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class Day02 extends AbstractDay {
 
-    public void part01() {
-        List<String> passwords = getPasswords("2020/day02part01.txt");
+    private static final String RESOURCE_NAME = "2020/day02part01.txt";
 
-        int validCount = 0;
+    public String part01() throws IOException {
+        AtomicInteger validCount = new AtomicInteger();
 
-        for(String password : passwords) {
-            PasswordLine passwordLine = parsePasswordLine(password);
+        getPasswordLines(RESOURCE_NAME).forEach(passwordLine -> {
             LOG.debug("passwordLine: {}", passwordLine);
             boolean valid = validatePasswordLinePart01(passwordLine);
             LOG.debug("valid: {}", valid);
 
             if(valid) {
-                validCount++;
+                validCount.getAndIncrement();
             }
-        }
+        });
 
-        LOG.info("Day 02 - Part 01: {}", validCount);
+        return "Day 02 - Part 01: " + validCount;
     }
 
-    public void part02() {
-        List<String> passwords = getPasswords("2020/day02part01.txt");
+    public String part02() throws IOException {
+        AtomicInteger validCount = new AtomicInteger();
 
-        int validCount = 0;
-
-        for(String password : passwords) {
-            PasswordLine passwordLine = parsePasswordLine(password);
+        getPasswordLines(RESOURCE_NAME).forEach(passwordLine -> {
             LOG.debug("passwordLine: {}", passwordLine);
             boolean valid = validatePasswordLinePart02(passwordLine);
             LOG.debug("valid: {}", valid);
 
             if(valid) {
-                validCount++;
+                validCount.getAndIncrement();
             }
-        }
+        });
 
-        LOG.info("Day 02 - Part 02: {}", validCount);
+        return "Day 02 - Part 02: " + validCount;
     }
 
     private boolean validatePasswordLinePart01(PasswordLine passwordLine) {
@@ -110,6 +103,10 @@ public class Day02 extends AbstractDay {
         return rtn;
     }
 
+    private Stream<PasswordLine> getPasswordLines(String resourceName) throws IOException {
+        return this.getFileLinesAsStream(resourceName).map(this::parsePasswordLine);
+    }
+
     private static class PasswordLine {
         int min;
         int max;
@@ -158,22 +155,4 @@ public class Day02 extends AbstractDay {
                     '}';
         }
     }
-
-    private List<String> getPasswords(String fileName) {
-        List<String> passwords = null;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(getFile(fileName)))) {
-            passwords = new ArrayList<>();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                passwords.add(line);
-            }
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return passwords;
-    }
-
 }

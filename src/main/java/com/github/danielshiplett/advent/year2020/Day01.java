@@ -1,16 +1,14 @@
 package com.github.danielshiplett.advent.year2020;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Day01 extends AbstractDay {
 
-    public void part01() {
-        List<Integer> expenses = getExpenses("2020/day01part01.txt");
+    private static final String RESOURCE_NAME = "2020/day01part01.txt";
+
+    public String part01() throws IOException {
+        List<Integer> expenses = getResourceAsIntegers(RESOURCE_NAME);
         int n = expenses.size();
         int result = 0;
 
@@ -31,11 +29,11 @@ public class Day01 extends AbstractDay {
             }
         }
 
-        LOG.info("Day 01 - Part 01: {}", result);
+        return "Day 01 - Part 01: " + result;
     }
 
-    public void part02() {
-        List<Integer> expenses = getExpenses("2020/day01part01.txt");
+    public String part02() throws IOException {
+        List<Integer> expenses = getResourceAsIntegers(RESOURCE_NAME);
         int n = expenses.size();
         int result = 0;
 
@@ -60,23 +58,6 @@ public class Day01 extends AbstractDay {
             }
         }
 
-        LOG.info("Day 01 - Part 02: {}", result);
-    }
-
-    private List<Integer> getExpenses(String fileName) {
-        List<Integer> expenses = null;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(getFile(fileName)))) {
-            expenses = new ArrayList<>();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                expenses.add(Integer.valueOf(line));
-            }
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return expenses;
+        return "Day 01 - Part 02: " + result;
     }
 }

@@ -9,14 +9,16 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractDay {
+public abstract class AbstractDay implements DayOfCode {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractDay.class);
 
-    public abstract void part01();
-    public abstract void part02();
+    public abstract String part01() throws IOException;
+    public abstract String part02() throws IOException;
 
     protected URL getResourceUrl(String resourceName) {
         return getClass().getClassLoader().getResource(resourceName);
@@ -28,5 +30,9 @@ public abstract class AbstractDay {
 
     protected Stream<String> getFileLinesAsStream(String resourceName) throws IOException {
         return Files.lines(Path.of(getResourceUrl(resourceName).getPath()));
+    }
+
+    protected List<Integer> getResourceAsIntegers(String resourceName) throws IOException {
+        return getFileLinesAsStream(resourceName).map(Integer::valueOf).collect(Collectors.toList());
     }
 }
